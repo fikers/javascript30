@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+<form>
+Enter total rubric score: <input type="number" name="rubricScore"/>
+<input type="button" onclick="myAverage(rubricScore.value)" value="Average">
+</form>
+
+<p>The average is <span id="output"></span>.</p>
+
+<script>
+function myAverage(total) {
+document.getElementById("output").innerHTML = total / 7;
+}
+</script>
+
+</body>
+</html>

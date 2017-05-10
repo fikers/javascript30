@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>JavaScript Clock - Built form Scratch</title>
+</head>
+
+	<div class="clock">
+		<div class="clock-face">
+			<div class="hand hour-hand" style="background-color: white"></div>
+			<div class="hand minute-hand"></div>
+			<div class="hand second-hand"></div>
+		</div> 
+	<div class="container">
+	<p class="hours" style="display:inline;  color: red; font-size: 2em; letter-spacing: 1px; font-family: 'Copperplate';">00</p>
+
+	<p class="colon" style="display:inline; color: white; font-size: 2em; letter-spacing: 1px; font-family: 'Copperplate';">:</p>
+
+	<p class="minutes" style="display:inline; color: red; font-size: 2em; letter-spacing: 1px; font-family: 'Copperplate';">00</p>
+
+	<p class="colon" style="display:inline; color: white; font-size: 2em; letter-spacing: 1px; font-family: 'Copperplate';">:</p>
+
+	<p class="seconds" style="display:inline; color: red;  font-size: 2em; letter-spacing: 1px; font-family: 'Copperplate';">00</p>
+
+	<p class="colon" style="display:inline; color: white; font-size: 2em; letter-spacing: 1px; font-family: 'Copperplate';">:</p>
+
+	<p class="mseconds" style="display:inline; color: red; font-size: 2em; letter-spacing: 1px; font-family: 'Copperplate';">00</p>
+	</div>
+
+	</div>
+
+	
+
+<body>
+
+</body>
+
+<style>
+
+html {
+	background-image: url(http://cdn.wonderfulengineering.com/wp-content/uploads/2014/07/background-wallpapers-32.jpg);
+	background-size: cover;
+	font-family: 'helvetica neue';
+	text-align: center; 
+	background-color: #00a9ec;
+}
+
+.container {
+	padding:40px;
+}
+
+.clock {
+      width: 30rem;
+      height: 30rem;
+      border:15px solid white;
+      border-radius:50%;
+      margin:60px auto;
+      position: relative;
+      padding:.25em;
+}
+
+.clock-face {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform: translateY(-3px); /* account for the height of the clock hands */
+    }
+
+.hand{ 
+    width:50%;
+    height:6px;
+    background:black;
+    position: absolute;
+    top:50%;
+    transform-origin: 100%;
+    transform: rotate(90deg);
+    transition: all 0.05s;
+    transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+}
+
+</style>
+
+
+<script>
+
+// The following script is for changing the analog clock portion of the page. 
+
+
+secondsHand = document.querySelector('.second-hand');
+minnutesHands = document.querySelector('.minute-hand');
+hoursHand = document.querySelector('.hour-hand');
+
+function getTime(event){
+	var time = new Date();
+
+	var seconds = time.getSeconds();
+	var secondsDegree = ((seconds/60)*360) + 90;
+	secondsHand.style.transform = `rotate(${secondsDegree}deg)`;
+
+	var minutes = time.getMinutes();
+	var minutesDegree = ((minutes/60)*360) + 90;
+	minnutesHands.style.transform = `rotate(${minutesDegree}deg)`;
+
+	var hours = time.getHours();
+	var hoursDegree = ((hours/12)*360) + 90;
+	hoursHand.style.transform = `rotate(${hoursDegree}deg)`;
+
+	console.log(hours, hoursDegree, minutes, minutesDegree, seconds, secondsDegree); 
+};
+
+setInterval(getTime, 1000);
+
+// The following script is for changing the digital clock portion of the page. 
+
+msecondsSection = document.querySelector('.mseconds');
+secondsSection = document.querySelector('.seconds');
+minutesSection = document.querySelector('.minutes');
+hoursSection = document.querySelector('.hours');
+
+function getTime2(event){
+	var time = new Date();
+
+	var mseconds = time.getMilliseconds();
+	msecondsSection.innerHTML =  ('0'  + mseconds).slice(-3);
+
+	var seconds = time.getSeconds();
+	secondsSection.innerHTML =  ('0'  + seconds).slice(-2);
+
+	var minutes = time.getMinutes();
+	minutesSection.innerHTML = ('0'  + minutes).slice(-2);
+
+	var hours = time.getHours();
+	hoursSection.innerHTML = ('0'  + hours).slice(-2);
+};
+
+setInterval(getTime2, 100);
+
+
+
+
+</script>
+
+
+
+</html>
